@@ -37,6 +37,15 @@ class App extends Component {
   })
     .catch(err => console.log("Error", err))
   }
+
+  getElephant = () => {
+    fetch("https://cors-anywhere.herokuapp.com/https://elephant-api.herokuapp.com/elephants/random")
+    .then(res => res.json())
+    .then(res => {console.log(res)
+    this.setState({ ...this.state, animalcard: [ ...this.state.animalcard, res[0].image]})
+  })
+    .catch(err => console.log("Error", err))
+  }
   
   
 
@@ -44,9 +53,10 @@ class App extends Component {
   return (
     <div className="App">
       <header className="App-header">
-      {this.state.animalcard.map(animal => <div><img src={animal} alt="Fox"></img></div>)}
+      {this.state.animalcard.map(animal => <div><img className="image-format" src={animal} alt="Fox"></img></div>)}
       <button onClick={this.getFox}>Add more Foxes</button>
       <button onClick={this.getDog}>Add more Dogs</button>
+      <button onClick={this.getElephant}>Add more Elephants</button>
       </header>
     </div>
   );
